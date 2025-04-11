@@ -11,15 +11,27 @@ headers = {
 
 def get_commits():
     r = requests.get(f"https://api.github.com/repos/{REPO}/commits", headers=headers)
-    return r.json()
+    if r.status_code == 200:
+        return r.json()
+    else:
+        print(f"Erreur lors de la récupération des commits : {r.status_code} - {r.text}")
+        return []
 
 def get_pulls():
     r = requests.get(f"https://api.github.com/repos/{REPO}/pulls", headers=headers)
-    return r.json()
+    if r.status_code == 200:
+        return r.json()
+    else:
+        print(f"Erreur lors de la récupération des pull requests : {r.status_code} - {r.text}")
+        return []
 
 def get_runs():
     r = requests.get(f"https://api.github.com/repos/{REPO}/actions/runs", headers=headers)
-    return r.json()
+    if r.status_code == 200:
+        return r.json().get("workflow_runs", [])
+    else:
+        print(f"Erreur lors de la récupération des executions de pipelines : {r.status_code} - {r.text}")
+        return []
 
 def print_report():
     print("Commits:", len(get_commits()))
