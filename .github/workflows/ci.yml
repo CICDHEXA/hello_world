@@ -25,6 +25,6 @@ jobs:
 
       - name: Exécution du rapport
         env:
-          GITHUB_TOKEN: ${{ secrets.tp_hexa }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB }}
           REPO: ${{ github.repository }}
         run: python main.py
