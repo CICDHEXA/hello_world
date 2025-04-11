@@ -1,3 +1,3 @@
 FROM python:latest
-COPY hello.py .
+COPY main.py .
 CMD ["python", "main.py"]
