@@ -2,7 +2,7 @@ import os
 import requests
 
 GITHUB_TOKEN = os.getenv("GITHUB_TOKEN")
-REPO = "owner/repo"
+REPO = "CICDHEXA/hello_world"
 
 headers = {
     "Authorization": f"Bearer {GITHUB_TOKEN}",
