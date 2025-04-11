@@ -1,21 +1,23 @@
-name: CI - Build and Run Hello World
-
-on:
-  push:
-    branches:
-      - main
-      - develop
-
 jobs:
-  build:
+  usage-report:
     runs-on: ubuntu-latest
-
     steps:
-    - name: Checkout code
+
+name: Checkout
       uses: actions/checkout@v3
 
-    - name: Build Docker image
-      run: docker build -t hello-python .
 
-    - name: Run Docker container
-      run: docker run hello-python
+name: Setup Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.x'
+
+
+name: Install dependencies
+      run: pip install requests
+
+
+name: Run usage report
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      run: python github_events.py
